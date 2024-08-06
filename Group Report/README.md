@@ -7,3 +7,14 @@ When finished you should export to PDF using VSCode and MarkdownPDF Extension.  
 Upload this PDF into Moodle - 1 per group.
 
 Please delete this file before submission.
+
+----
+
+## Declaration of Authorship
+
+We, AUTHORS NAME HERE, confirm that the work presented in this assessment is my own. Where information has been derived from other sources, I confirm that this has been indicated in the work.
+
+
+Digitally Sign with Your name Here
+
+ASSESSMENT DATE
