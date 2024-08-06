@@ -11,9 +11,9 @@ Use this section to show us what your Website is about.   Include a Screenshot t
 
 Look at some other Websites online in GitHub and see how they use the README File to showcase thier site.  Good examples are:
 
-- 
--     
-- 
+- https://github.com/smaranjitghose/awesome-portfolio-websites
+- https://github.com/gohugoio/hugo    
+- https://github.com/academicpages/academicpages.github.io
 
 ##  Replace the Tags on the side menu of GitHub
 
