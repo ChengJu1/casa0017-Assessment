@@ -14,6 +14,7 @@ const COUNTRY_POLAND_URL    = "/data/Poland.geojson";
 const COUNTRY_SOUTHKOREA_URL= "/data/SouthKorea.geojson";
 const GLOBAL_BOUNDARIES_URL = "/data/globalboundaries_simplified.geojson";
 
+
 import { Line2 } from "three/examples/jsm/lines/Line2.js";
 import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
 import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
@@ -668,3 +669,4 @@ LINE2_MATERIALS.push(selectedGlowMat2);
 }
 
 main();
+
