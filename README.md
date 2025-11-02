@@ -29,32 +29,32 @@ Having Contact Details is also good as it shows people how to get in contact wit
 
 ##  Installation
 1) Prerequisites
-Git
-Node.js 20 LTS (recommended; works on Apple Silicon & Intel)
-    Use nvm (Node Version Manager) if possible.
+- Git
+- Node.js 20 LTS (recommended; works on Apple Silicon & Intel)
+-    Use nvm (Node Version Manager) if possible.
 ### Install nvm (macOS / Linux)
 #### macOS / Linux
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+- curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 #### restart your terminal, then:
-nvm install 20
-nvm use 20
-node -v   # should show v20.x
+- nvm install 20
+- nvm use 20
+- node -v   # should show v20.x
 ### Windows (PowerShell) – use nvm-windows
-Install: https://github.com/coreybutler/nvm-windows
-Then:
-    nvm install 20
-    nvm use 20
-    node -v
+- Install: https://github.com/coreybutler/nvm-windows
+- Then:
+-     nvm install 20
+-     nvm use 20
+-     node -v
 2) Clone
-    git clone <your-fork-or-repo-url>.git
-    cd casa0017-Assessment/Website
+-     git clone <your-fork-or-repo-url>.git
+-     cd casa0017-Assessment/Website
 3) Install dependencies
-npm install
+- npm install
 4) Run the dev server
-    npm run dev
-    Then open the printed local URL (typically http://localhost:5173/).
+-     npm run dev
+-     Then open the printed local URL (typically http://localhost:5173/).
 5) Build for production
-    npm run build
+-     npm run build
 6) Preview the production build (optional)
-    npm run preview
+-     npm run preview
 
