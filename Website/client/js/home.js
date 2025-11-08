@@ -515,9 +515,9 @@ LINE2_MATERIALS.push(selectedGlowMat2);
   /* ---------- Layers ---------- */
   async function loadAll() {
     const rasters = [
-      // Tree cover: light â†’ green
+      // Tree cover: light at green
       { key: "tree", name: "Tree Cover in 2000", hueRange: [0, 0], url: TREECOVER_DATA_URL, opts: { colorRampColors: ["#F7FBEA", "#CBEAA6"] } },
-      // GDP: light â†’ deep purple
+      // GDP: light at deep purple
       { key: "gdpasc", name: "GDP 2000 (ASC)", hueRange: [0, 0], url: GDP_ASC_URL, opts: { colorRampColors: ["#D9BFD6", "#3A0D3E"] } }
     ];
     await Promise.all(rasters.map(async r => { r.file = parseData(await loadFile(r.url)); }));
