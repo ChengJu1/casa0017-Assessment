@@ -161,6 +161,38 @@ a:hover { text-decoration: underline; }
   gap: 12px;
 }
 .pill-inner .left, .pill-inner .right { width: 40px; }
+/* Stack footer title over links, centered */
+.pill-bar.footer .center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;                /* space between CASA 0017 and links */
+}
+
+/* Footer title style (optional) */
+.footer-title{
+  font-weight: 1000;
+}
+
+/* Inline, centered link row under the title */
+.footer-links{
+  display: flex;
+  align-items: center;
+  gap: 6px;               /* space around divider */
+}
+
+.footer-links a{
+  text-decoration: none;
+  color: #aeaeae;          /* match your theme */
+  font-weight: 500;
+}
+.footer-links a:hover{ text-decoration: underline; }
+
+.footer-links .divider{
+  opacity: 0.45;
+  user-select: none;
+}
+
 
 /* === Stack site title over nav INSIDE the pill header === */
 .pill-inner .center{
