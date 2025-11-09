@@ -10,8 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1"></script>
   </head>
-  <body>
-      <header class="pill-bar header">
+  
+  <header class="pill-bar">
     <div class="pill-inner">
       <div class="left"></div>
 
@@ -29,7 +29,10 @@
 
      
   </header>
-  
+  <body>
+    <div class="content">
+      
+ 
     <h2 id="countryName"></h2>
 
     <!-- Country description area (HTML loaded dynamically here) -->
@@ -43,6 +46,8 @@
     <div style="margin-top:10px;">
       <button onclick="showAllData()">Show All Data</button>
       <button onclick="erase()">Redo Line</button>
+    </div>
+
     </div>
 
     <script type="text/javascript" src="js/utils/lineGraph.js"></script>
