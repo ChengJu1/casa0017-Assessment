@@ -35,7 +35,7 @@ Having Contact Details is also good as it shows people how to get in contact wit
 - SQL Lite
 -    Use nvm (Node Version Manager) if possible.
   
-### Install nvm (macOS / Linux)
+### Install nvm
 ##### macOS / Linux
 -     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 ###### restart your terminal, then:
