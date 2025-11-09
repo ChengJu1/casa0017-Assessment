@@ -31,6 +31,8 @@ Having Contact Details is also good as it shows people how to get in contact wit
 ### Prerequisites
 - Git
 - Node.js 20 LTS (recommended; works on Apple Silicon & Intel)
+- Vite
+- SQL Lite
 -    Use nvm (Node Version Manager) if possible.
   
 ### Install nvm (macOS / Linux)
@@ -53,12 +55,12 @@ Having Contact Details is also good as it shows people how to get in contact wit
 -     cd casa0017-Assessment/Website
 -     npm install
 
-- Backend-Terminal1
+### Backend-Terminal1
 -     cd casa0017-Assessment/Website/server
 -     node db/init.js
 -     node routes/app.js
 
-- Frontend-Terminal2
+### Frontend-Terminal2
 -     cd casa0017-Assessment/Website/client
 1) Run the dev server
 -     npm run dev
