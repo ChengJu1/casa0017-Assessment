@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Country Line Graph</title>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1"></script>
+  </head>
+  <body>
+    <h1 id="countryName"></h1>
+
+    <!-- Country description area (HTML loaded dynamically here) -->
+    <div id="countryContent" style="max-width:800px; line-height:1.6;"></div>
+
+    <div style="position:relative; width:800px; height:400px;">
+      <canvas id="canvasChart" width="800" height="400"
+        style="border:1px solid; position:absolute; top:0; left:0;"></canvas>
+    </div>
+
+    <div style="margin-top:10px;">
+      <button onclick="showAllData()">Show All Data</button>
+      <button onclick="erase()">Redo Line</button>
+    </div>
+
+    <script type="text/javascript" src="js/utils/lineGraph.js"></script>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const countryName = params.get("country");
+
+      document.getElementById("countryName").textContent = countryName;
+
+      // Mapping to ISO codes
+      const ISO3_BY_NAME = {
+        "Brazil": "BRA",
+        "Poland": "POL",
+        "South Korea": "KOR"
+      };
+
+      // Dynamically load the correct HTML snippet
+      async function loadCountryHTML(countryName) {
+        const fileName = countryName.toLowerCase().replace(/\s+/g, "") + ".html";
+        const url = `content/${fileName}`;
+
+        try {
+          const res = await fetch(url);
+          if (!res.ok) throw new Error("Country content not found: " + url);
+
+          const html = await res.text();
+          document.getElementById("countryContent").innerHTML = html;
+        } catch (err) {
+          console.warn(err);
+          document.getElementById("countryContent").innerHTML =
+            `<p>No description available for ${countryName}.</p>`;
+        }
+      }
+
+      const countryCode = ISO3_BY_NAME[countryName];
+
+      window.onload = async function() {
+        await loadCountryHTML(countryName);   // ← Load written content
+        init();                              // ← Set up chart canvas etc.
+        await fetchCountryGDP(countryCode);  // ← Fetch and draw data
+      };
+    </script>
+  </body>
+</html>

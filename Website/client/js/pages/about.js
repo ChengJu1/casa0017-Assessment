@@ -1,1 +1,0 @@
-// About page specific JavaScript code with timeline feature called here

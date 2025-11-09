@@ -6,6 +6,7 @@ currX = 0,
     currY = 0;
 dot_flag = false;
 var show_flag = false;
+
 const dpr = window.devicePixelRatio || 1;
 
 var x = "blue",
@@ -18,8 +19,6 @@ var allLabels = [];
 var allValues = [];
 var policyData = [];
 
-var COUNTRIES = ["Brazil", "Poland", "South Korea"];
-var ISO3_BY_NAME = { "Brazil":"BRA", "Poland":"POL", "South Korea":"KOR" };
 
 // Register plugins ONCE at module level
 if (window['chartjs-plugin-annotation']) {
@@ -33,7 +32,9 @@ if (window['chartjs-plugin-annotation']) {
         if (show_flag && drawnSegments.length > 0) {
           drawDeviation(chart);
         }
-        redrawUserLines();
+       
+       redrawUserLines();
+        
       }
     }
   );
@@ -61,14 +62,6 @@ function init() {
     canvas.addEventListener('mouseout', function (e) {
         findxy('out', e)
     }, false)
-}
-
-async function loadDATAFromAPI(){
-  for (var i=0;i<COUNTRIES.length;i++){
-    var name = COUNTRIES[1];
-    var iso3 = ISO3_BY_NAME[name];
-    await fetchCountryGDP(iso3);
-  }
 }
 
 async function fetchCountryGDP(iso3) {
@@ -131,14 +124,13 @@ async function fetchPolicyData(iso3, indicatorCode) {
 }
 
 function erase() {
-    var m = confirm("Redo Line?")
-    if (m) {
-        drawnSegments = [];
-        maxDrawnX = window.lastPoint ? window.lastPoint.x : 0;
-        show_flag = false;
-        graphUpdate(allLabels, allValues, policyData);
-    }
+ 
+    drawnSegments = [];
+    maxDrawnX = window.lastPoint ? window.lastPoint.x : 0;
+    show_flag = false;
+    graphUpdate(allLabels, allValues, policyData);
 }
+
 
 function showAllData() {
     show_flag = true
@@ -194,7 +186,8 @@ function graphUpdate(labels, values, policies = []) {
                 display: false, // Hidden by default
                 content: policyNames, // Array of all policy names for this year
                 position: 'start',
-                yAdjust: -100,
+                yAdjust: -150,
+                z: 100,
                 color: 'rgba(32, 101, 19, 1)',
                 backgroundColor: 'rgba(184, 201, 107, 1)',
                 font: { 
@@ -202,6 +195,7 @@ function graphUpdate(labels, values, policies = []) {
                     weight: 'light',
                     family: 'Poppins'
                 },
+                showBlur: 15,
                 padding: 6,
                 borderRadius: 4
             },
@@ -272,12 +266,6 @@ function graphUpdate(labels, values, policies = []) {
             }
         }
     });
-
-    // Debug: Check what Chart.js sees
-    setTimeout(() => {
-        console.log('Chart x-axis labels:', chart.scales.x.ticks.map(t => t.label));
-        console.log('Chart x-axis min/max:', chart.scales.x.min, chart.scales.x.max);
-    }, 100);
 
     const meta = chart.getDatasetMeta(0);
     const lastVisibleIdx = displayValues.findLastIndex(v => v !== null);
@@ -380,6 +368,7 @@ function redrawUserLines() {
         ctx.fillStyle = "blue";
         ctx.fill();
     }
+   
 }
 
 function draw() {
@@ -430,6 +419,7 @@ function findxy(res, e) {
     }
 
     if (res == 'move' && flag) {
+        if (show_flag) return;
         dot_flag = false
         currX = e.clientX - canvas.getBoundingClientRect().left
         currY = e.clientY - canvas.getBoundingClientRect().top
@@ -443,8 +433,3 @@ function findxy(res, e) {
         }
     }
 }
-
-window.onload = async function() {
-  init();
-  await fetchCountryGDP('POL');
-};
