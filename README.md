@@ -28,7 +28,7 @@ Include a section that gives intructions on how to install the app or run it in 
 Having Contact Details is also good as it shows people how to get in contact with you if they'd like to contribute to the app. 
 
 ##  Installation
-###1) Prerequisites
+### Prerequisites
 - Git
 - Node.js 20 LTS (recommended; works on Apple Silicon & Intel)
 -    Use nvm (Node Version Manager) if possible.
@@ -46,25 +46,25 @@ Having Contact Details is also good as it shows people how to get in contact wit
 -     nvm install 20
 -     nvm use 20
 -     node -v
-###2) Clone
+### Clone
 -     git clone <your-fork-or-repo-url>.git
 
-###3) Install dependencies
-- npm install
+### Install dependencies
+-     cd casa0017-Assessment/Website
+-     npm install
 
 - Backend-Terminal1
 -     cd casa0017-Assessment/Website/server
--     npm install
 -     node db/init.js
 -     node routes/app.js
 
 - Frontend-Terminal2
 -     cd casa0017-Assessment/Website/client
-###4) Run the dev server
+1) Run the dev server
 -     npm run dev
 -     Then open the printed local URL (typically http://localhost:5173/).
-###5) Build for production
+2) Build for production
 -     npm run build
-###6) Preview the production build (optional)
+3) Preview the production build (optional)
 -     npm run preview
 
