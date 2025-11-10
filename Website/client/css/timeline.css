@@ -35,6 +35,16 @@
   /* Legend vertical offset so its top lines up with map canvases
      (approx. height of title + metric controls above maps) */
   --legend-offset-top: 156px;
+
+
+  --slider-track:  #f5f5f5;
+  --slider-fill:   rgba(195, 207, 109, 1); /* ← your color */
+  --slider-thumb:  rgba(195, 207, 109, 1); /* thumb matches fill */
+  --slider-focus:  rgba(255, 255, 255, 0);
+  --slider-height: 10px;
+  --slider-radius: 999px;
+
+
 }
 
 /* =========================================================
@@ -194,7 +204,51 @@ body.compact{
   margin: 38px 0 6px;  /* tight */
 }
 .timeline__label{ font-size: 14px; color: #444; }
-.timeline__range{ width: min(70vw, 900px); }
+
+.timeline__range{
+  -webkit-appearance: none;
+  appearance: none;
+  width: min(70vw, 900px);
+  height: var(--slider-height);
+  border-radius: var(--slider-radius);
+  background: var(--slider-track);
+  outline: none;
+}
+.timeline__range::-webkit-slider-runnable-track{
+  height: var(--slider-height);
+  background: transparent;
+  border-radius: var(--slider-radius);
+}
+.timeline__range::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--slider-thumb);
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.08);
+  margin-top: calc((var(--slider-height) - 18px)/2);
+  cursor: pointer;
+}
+.timeline__range::-moz-range-track{
+  height: var(--slider-height);
+  background: var(--slider-track);
+  border-radius: var(--slider-radius);
+}
+.timeline__range::-moz-range-progress{
+  height: var(--slider-height);
+  background: var(--slider-fill);
+  border-radius: var(--slider-radius);
+}
+.timeline__range::-moz-range-thumb{
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--slider-thumb);
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.08);
+  cursor: pointer;
+}
+.timeline__range:focus{ box-shadow: 0 0 0 4px var(--slider-focus); }
 
 /* Optional attribution */
 .author{
