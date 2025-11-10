@@ -27,7 +27,6 @@
 - **Timeline slider & country switching** for quick scenario testing  
 - **Clean API layer** (Node.js/Express) to serve curated indicators  
 - **Modular data pipeline** to add indicators without changing UI logic  
-- **Accessible & responsive UI** designed for desktop and mobile
 
 ---
 
