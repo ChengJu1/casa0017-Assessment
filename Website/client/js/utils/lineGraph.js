@@ -352,20 +352,20 @@ function redrawUserLines() {
     for(let i = 0; i< drawnSegments.length; i++){
         ctx.lineTo(drawnSegments[i].x, drawnSegments[i].y)
     }
-    ctx.strokeStyle = "blue"
+    ctx.strokeStyle = "rgba(255, 217, 0, 1)"
     ctx.lineWidth = 3
     ctx.stroke()
     
     ctx.beginPath()
     ctx.arc(window.lastPoint.x, window.lastPoint.y, 5, 0, 2 * Math.PI);
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "rgba(255, 217, 0, 1)";
     ctx.fill();
 
     if(drawnSegments.length>0){
         const lastSeg = drawnSegments[drawnSegments.length -1]
         ctx.beginPath()
         ctx.arc(lastSeg.x, lastSeg.y, 5, 0, 2 * Math.PI)
-        ctx.fillStyle = "blue";
+        ctx.fillStyle = "rgba(255, 217, 0, 1)";
         ctx.fill();
     }
    
