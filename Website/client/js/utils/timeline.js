@@ -146,12 +146,14 @@ var WORLD_GEOJSON_URL = "./src/map.geojson";
 var GDP_MIN = Infinity;
 var GDP_MAX = -Infinity; */
 
-/* Per-country max zoom to keep visual size balanced */
-var MAX_ZOOM_MAP = {
-  "Brazil": 5.5,
-  "Poland": 5.0,
-  "South Korea": 5.5
-};
+
+// Per-country max zoom to balance visual scale
+const MAX_ZOOM_MAP = { Brazil: 5.5, Poland: 5.0, "South Korea": 4.5 };
+
+// Per-country visual tweaks to equalize perceived size
+const ZOOM_TWEAK = { Brazil: 0.0, Poland: 0.25, "South Korea": 0.55 }; // was 0.55
+const PAD_TWEAK  = { Brazil: 0,   Poland: -4,   "South Korea": -8 };  // was -8
+
 
 /* Make names comparable: lower case, remove extra chars */
 function normName(s) {
@@ -233,13 +235,13 @@ function colorFromValue01(v){
 }
 
 function updateLegend() {
-  var top = colorFromValue01(1);
-  var bottom = colorFromValue01(0);
-  var el = document.getElementById("legendBar");
-  if (el) {
-    el.style.background = "linear-gradient(180deg, " + top + " 0%, " + bottom + " 100%)";
-  }
+  const left  = colorFromValue01(0);  // low
+  const right = colorFromValue01(1);  // high
+
+  const elH = document.getElementById("legendBarH");
+  if (elH) elH.style.background = `linear-gradient(90deg, ${left} 0%, ${right} 100%)`;
 }
+
 
 /* ===================== 4) Map caches ===================== */
 var mapsByName = {};   // { "Brazil": LeafletMap, ... }
@@ -270,9 +272,9 @@ function calcPaddingPx(containerEl) {
   return p;
 }
 
-/* ===================== 5) Build a single country map ===================== */
+/* 5) Build one country map -------------------------- */
 function buildCountry(elId, countryName) {
-  var map = L.map(elId, {
+  const map = L.map(elId, {
     zoomControl: false,
     dragging: false,
     scrollWheelZoom: false,
@@ -283,52 +285,60 @@ function buildCountry(elId, countryName) {
     attributionControl: false
   });
 
-  return loadWorld().then(function (world) {
-    var feats = world.features.filter(function (f) {
-      var props = f ? f.properties : null;
-      return featureMatchesName(props || {}, countryName);
-    });
+  return loadWorld()
+    .then(world => {
+      const feats = world.features.filter(f =>
+        featureMatchesName(f?.properties || {}, countryName)
+      );
 
-    if (feats.length === 0) {
-      var host = document.getElementById(elId);
+      if (feats.length === 0) {
+        const host = document.getElementById(elId);
+        if (host) {
+          host.innerHTML = `<div style="padding:8px;color:#c00;font-size:12px;">
+            No feature for ${countryName}
+          </div>`;
+        }
+        return;
+      }
+
+      const layer = L.geoJSON(
+        { type: "FeatureCollection", features: feats },
+        { style: { color: "#778899", weight: 1.2, opacity: 0.9, fillColor: "#ffffff", fillOpacity: 1 } }
+      ).addTo(map);
+
+      const maxZ = MAX_ZOOM_MAP[countryName] || 6;
+      const b1 = layer.getBounds();
+      if (b1?.isValid && b1.isValid()) {
+        const pad1 = calcPaddingPx(document.getElementById(elId)) + (PAD_TWEAK[countryName] || 0);
+        map.fitBounds(b1, { padding: [pad1, pad1], maxZoom: maxZ });
+        map.setZoom(map.getZoom() + (ZOOM_TWEAK[countryName] || 0));
+      }
+
+      // Fit again after layout stabilizes
+      requestAnimationFrame(() => {
+        map.invalidateSize();
+        const b2 = layer.getBounds();
+        if (b2?.isValid && b2.isValid()) {
+          const pad2 = calcPaddingPx(document.getElementById(elId)) + (PAD_TWEAK[countryName] || 0);
+          map.fitBounds(b2, { padding: [pad2, pad2], maxZoom: maxZ });
+          map.setZoom(map.getZoom() + (ZOOM_TWEAK[countryName] || 0));
+        }
+      });
+
+      mapsByName[countryName] = map;
+      layersByName[countryName] = layer;
+    })
+    .catch(err => {
+      const host = document.getElementById(elId);
       if (host) {
-        host.innerHTML = '<div style="padding:8px;color:#c00;font-size:12px;">No feature for '
-          + countryName + '</div>';
-      }
-      return;
-    }
-
-    var layer = L.geoJSON({ type: "FeatureCollection", features: feats }, {
-      style: { color: "#778899", weight: 1.2, opacity: 0.9, fillColor: "#ffffff", fillOpacity: 1 }
-    }).addTo(map);
-
-    var maxZ = MAX_ZOOM_MAP[countryName] || 6;
-    var b1 = layer.getBounds();
-    if (b1 && b1.isValid && b1.isValid()) {
-      var pad1 = calcPaddingPx(document.getElementById(elId));
-      map.fitBounds(b1, { padding: [pad1, pad1], maxZoom: maxZ });
-    }
-
-    /* fit again after layout is stable */
-    requestAnimationFrame(function () {
-      map.invalidateSize();
-      var b2 = layer.getBounds();
-      if (b2 && b2.isValid && b2.isValid()) {
-        var pad2 = calcPaddingPx(document.getElementById(elId));
-        map.fitBounds(b2, { padding: [pad2, pad2], maxZoom: maxZ });
+        host.innerHTML = `<div style="padding:8px;color:#c00;font-size:12px;">
+          ${String(err.message || err)}
+        </div>`;
       }
     });
-
-    mapsByName[countryName] = map;
-    layersByName[countryName] = layer;
-  }).catch(function (err) {
-    var host = document.getElementById(elId);
-    if (host) {
-      host.innerHTML = '<div style="padding:8px;color:#c00;font-size:12px;">'
-        + String(err.message || err) + '</div>';
-    }
-  });
 }
+
+
 
 /* ===================== 6) Redraw on metric/year change ===================== */
 // Update maps and money when metric or year changes
@@ -411,8 +421,8 @@ function scale01(v, vmin, vmax){
 // ----- Money stacks (multi-line) -----
 const CASH_PER_ROW   = 12;    // how many notes per row
 const NOTE_SPACING_X = 20;   // horizontal overlap/spacing (px)
-const NOTE_SPACING_Y = 50;   // vertical spacing between rows (px)
-const NOTE_WIDTH_PX  = 40;   // image width (you can match your CSS)
+const NOTE_SPACING_Y = 38;   // vertical spacing between rows (px)
+const NOTE_WIDTH_PX  = 30;   // image width (you can match your CSS)
 
 function updateCash(countryName, val01) {
   const id = idFromName(countryName);
