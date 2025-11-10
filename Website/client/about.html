@@ -1,50 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us</title>
-  <link rel="stylesheet" href="about.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Equilibrium — About</title>
+
+  <!-- Main site styles (includes Poppins + pill header/footer) -->
+  <link rel="stylesheet" href="/css/home.css" />
+  <!-- Page-specific styles -->
+  <link rel="stylesheet" href="/css/about.css" />
+  <meta name="description" content="Meet the Equilibrium team: the people behind Growth vs Environment." />
 </head>
+
 <body>
-  <header>
-    <h1>Meet Our Team</h1>
+  <!-- Pill Header -->
+  <header class="pill-bar header" role="banner">
+    <div class="pill-inner">
+      <div class="left" aria-hidden="true"></div>
+
+      <div class="center">
+        <a class="site-title" href="/" aria-label="Equilibrium — Home">Equilibrium</a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/index.html" aria-current="page">Home</a>
+          <a href="/timeline.html">Timeline</a>
+          <a href="/country.html?country=Brazil">Brazil</a>
+          <a href="/country.html?country=Poland">Poland</a>
+          <a href="/country.html?country=South%20Korea">South Korea</a>
+        </nav>
+      </div>
+
+      <div class="right" aria-hidden="true"></div>
+    </div>
   </header>
 
-  <section class="team-container">
-    <div class="team-member">
-      <img src="img/member1.jpg" alt="Member 1">
-      <h3>Alice Chen</h3>
-      <p>Frontend Developer</p>
-    </div>
+  <main id="main" tabindex="-1">
+    <section class="about-hero" aria-labelledby="about-title">
+      
+      <h2 id="about-title">About Us</h2>
 
-    <div class="team-member">
-      <img src="img/member2.jpg" alt="Member 2">
-      <h3>Brian Lee</h3>
-      <p>Backend Developer</p>
-    </div>
+    <section class="team-container" aria-labelledby="team-title">
+      <h2 id="team-title" class="visually-hidden">Team</h2>
 
-    <div class="team-member">
-      <img src="img/member3.jpg" alt="Member 3">
-      <h3>Claire Wong</h3>
-      <p>UI/UX Designer</p>
-    </div>
+      <article class="team-member">
+        <img src="/img/member1.png" alt="Portrait of Xinyuan Sun" loading="lazy" />
+        <h3 class="member-name">Xinyuan Sun</h3>
+        <p class="member-role">Frontend Developer &amp; UI/UX Designer</p>
+      </article>
 
-    <div class="team-member">
-      <img src="img/member4.jpg" alt="Member 4">
-      <h3>David Zhang</h3>
-      <p>Data Analyst</p>
-    </div>
+      <article class="team-member">
+        <img src="/img/member2.png" alt="Portrait of Lizi Wang" loading="lazy" />
+        <h3 class="member-name">Lizi Wang</h3>
+        <p class="member-role">Backend Developer &amp; Data Analyst</p>
+      </article>
 
-    <div class="team-member">
-      <img src="img/member5.jpg" alt="Member 5">
-      <h3>Emma Liu</h3>
-      <p>Project Manager</p>
-    </div>
-  </section>
+      <article class="team-member">
+        <img src="/img/member3.png" alt="Portrait of Ananya Kedlaya" loading="lazy" />
+        <h3 class="member-name">Ananya Kedlaya</h3>
+        <p class="member-role">Frontend and Backend Developer</p>
+      </article>
 
-  <footer>
-    <p>© 2025 Our Team | All Rights Reserved</p>
+      <article class="team-member">
+        <img src="/img/member4.png" alt="Portrait of Yussr Osman" loading="lazy" />
+        <h3 class="member-name">Yussr Osman</h3>
+        <p class="member-role">UI/UX Designer</p>
+      </article>
+
+      <article class="team-member">
+        <img src="/img/member5.png" alt="Portrait of Junrong Wang" loading="lazy" />
+        <h3 class="member-name">Junrong Wang</h3>
+        <p class="member-role">Frontend Developer &amp; UI/UX Designer</p>
+      </article>
+    </section>
+  </main>
+
+  <!-- Pill Footer -->
+  <footer class="pill-bar footer" role="contentinfo">
+    <div class="pill-inner">
+      <div class="left" aria-hidden="true"></div>
+
+      <div class="center">
+        <div class="footer-title">CASA 0017</div>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="https://github.com/ChengJu1/casa0017-Assessment" target="_blank" rel="noopener noreferrer">
+            Group GitHub Website
+          </a>
+        </nav>
+      </div>
+
+      <div class="right" aria-hidden="true"></div>
+    </div>
   </footer>
 </body>
 </html>
