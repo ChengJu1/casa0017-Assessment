@@ -179,7 +179,7 @@ function graphUpdate(labels, values, policies = []) {
             type: 'line',
             xMin: yearString,
             xMax: yearString,
-            borderColor: 'rgb(255, 0, 0)',
+            borderColor: '#da79ceff',
             borderWidth: 1,
             borderDash: [8, 4],
             label: {
@@ -218,7 +218,7 @@ function graphUpdate(labels, values, policies = []) {
                 label: "GDP Data",
                 data: displayValues,
                 fill: false,
-                borderColor: "rgba(23, 99, 86, 0.56)",
+                borderColor: "rgba(52, 23, 99, 0.56)",
                 tension: 0.1,
                 spanGaps: true
             }]
@@ -246,7 +246,7 @@ function graphUpdate(labels, values, policies = []) {
                     },
                     backgroundColor: (ctx) => {
                         const lastVisibleIdx = displayValues.findLastIndex(v => v !== null);
-                        return ctx.index === lastVisibleIdx ? "rgba(23,99,86,0.9)" : "rgba(163, 163, 163, 0.5)";
+                        return ctx.index === lastVisibleIdx ? "rgba(176, 138, 219, 0.9)" : "rgba(222, 198, 246, 0.5)";
                     }
                 }
             },
@@ -311,9 +311,9 @@ function drawDeviation(chart) {
                 const avgActual = (actualPoint.y + nextActualPoint.y) / 2;
                 
                 if (avgDrawn < avgActual) {
-                    ctx.fillStyle = "rgba(255, 0, 0, 0.2)";
+                    ctx.fillStyle = "rgba(255, 0, 247, 0.21)";
                 } else {
-                    ctx.fillStyle = "rgba(0, 255, 0, 0.2)";
+                    ctx.fillStyle = "rgba(195, 255, 0, 0.2)";
                 }
                 ctx.fill();
             }

@@ -3,6 +3,8 @@
    ========================= */
 
 /* Vars just for the header frame */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
 :root{
   --pill-gap: 16px;
   --header-height: 88px;
@@ -25,7 +27,7 @@
 }
 
 body {
-  font-family: "Inter", Arial, sans-serif;
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   background-color: #f9fafb;
   color: #222;
   line-height: 1.6;
@@ -51,7 +53,7 @@ body.with-pill{
   display: flex;
   align-items: center;     /* vertically centers contents */
   background: #eff2dd;     /* light tone */
-  box-shadow: 0 2px 12px rgba(0,0,0,.09);
+  box-shadow: 0 2px 12px rgba(0,0,0,.9);
   z-index: 20;
 }
 
@@ -100,17 +102,17 @@ body.with-pill h2#countryName{ padding-top: 0; }
 
 .content{
     padding: 40px;
-    background-color: rgb(195, 190, 209);
+    background-color: rgba(255, 255, 255, 0);
 }
 /* Title */
 h2#countryName {
 padding-top: 40px;
-  font-size: 2.2rem;
+  /* font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 20px;
-  text-align: center;
-  color: #2b3a67;
-}
+  text-align: center; */
+  color: #bcbcbc00;
+} 
 
 /* Country Description Area */
 #countryContent {
@@ -125,7 +127,7 @@ padding-top: 40px;
 
 /* Chart Container */
 div[style*="position:relative"] {
-  position: relative !important;
+  position: center !important;
   width: 800px;
   max-width: 100%;
   height: 400px;
@@ -146,7 +148,7 @@ div[style*="position:relative"] {
 
 /* Buttons */
 button {
-  background-color: #2b3a67;
+  background-color: #b9c86a;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -158,7 +160,7 @@ button {
 }
 
 button:hover {
-  background-color: #3b4b85;
+  background-color: #D9BFD6;
   transform: translateY(-1px);
 }
 
