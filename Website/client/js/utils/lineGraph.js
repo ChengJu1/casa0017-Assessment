@@ -381,7 +381,7 @@ function draw() {
 
     ctx.beginPath()
     ctx.arc(window.lastPoint.x, window.lastPoint.y, 5, 0, 2 * Math.PI);
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "rgba(255, 217, 0, 1)";
     ctx.fill();
 
     ctx.closePath()
