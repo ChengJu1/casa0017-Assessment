@@ -26,28 +26,14 @@
     2020: { air: 0.68, forest: 0.68, water: 0.66, gdp: 1630 }
   }
 };*/
-
 var COUNTRIES = ["Brazil", "Poland", "South Korea"];
-var WORLD_GEOJSON_URL = "./src/map.geojson";
+var WORLD_GEOJSON_URL = "/src/map.geojson";
 var GDP_MIN = Infinity;
 var GDP_MAX = -Infinity;
 
 // api data fetch + process -> fill DATA
-var DATA = {}; 
+var DATA = {};
 var ISO3_BY_NAME = { "Brazil":"BRA", "Poland":"POL", "South Korea":"KOR" };
-
-async function fetchJSON(url, init) {
-  const res = await fetch(url, init);
-  const ct = res.headers.get("content-type") || "";
-  const text = await res.text(); 
-  if (!res.ok) {
-    throw new Error(`HTTP ${res.status} @ ${url}\n${text.slice(0, 200)}`);
-  }
-  if (!ct.includes("application/json")) {
-    throw new Error(`Expected JSON but got ${ct} @ ${url}\nPreview: ${text.slice(0, 200)}`);
-  }
-  return JSON.parse(text);
-}
 
 // tools: min/max + normalize 0~1
 function _minmax(arr){
@@ -66,49 +52,45 @@ function _norm01(v,min,max){
   return Math.max(0,Math.min(1,x));
 }
 
+
 const API_BASE = "";
 
-// backend API fetch for a country's series data
-async function _fetchCountrySeries(iso3){
-  var codes = [
-    'NY.GDP.MKTP.CD',     // GDP
-    'EN.ATM.PM25.MC.M3',  // PM2.5 -> air (lower is better)
-    'AG.LND.FRST.ZS',     // forest (higher is better)
-    'EN.ATM.CO2E.PC'      // CO2 -> co2 (lower is better)
-  ].join(',');
 
-  var url = `${API_BASE}/api/country/${iso3}/series?codes=${encodeURIComponent(codes)}`;
-  var res = await fetch(url);
-  if(!res.ok) throw new Error('API error: '+url);
-  return await res.json();
+async function _fetchCountrySeries(iso3){
+  const codes = [
+    "NY.GDP.MKTP.CD",    
+    "EN.ATM.PM25.MC.M3", 
+    "AG.LND.FRST.ZS",    
+    "EN.ATM.CO2E.PC"    
+  ].join(",");
+
+  const url = `/api/country/${iso3}/series?codes=${encodeURIComponent(codes)}`;
+  return await fetchJSON(url);
 }
 
-// pivot fetched rows into per-year records
 function _pivotSeries(rows){
-  var byYear = {};
+  const byYear = {};
   rows.forEach(r=>{
-    var y = Number(r.year);
+    const y = Number(r.year);
     if(!byYear[y]) byYear[y] = {};
-    if (r.code === 'NY.GDP.MKTP.CD')    byYear[y].gdp    = r.value;
-    if (r.code === 'EN.ATM.PM25.MC.M3') byYear[y].pm25  = r.value;
-    if (r.code === 'AG.LND.FRST.ZS')    byYear[y].forest= r.value;
-    if (r.code === 'EN.ATM.CO2E.PC')    byYear[y].co2raw= r.value; // raw CO2 value
+    if (r.code === "NY.GDP.MKTP.CD")    byYear[y].gdp    = r.value;
+    if (r.code === "EN.ATM.PM25.MC.M3") byYear[y].pm25   = r.value;
+    if (r.code === "AG.LND.FRST.ZS")    byYear[y].forest = r.value;
+    if (r.code === "EN.ATM.CO2E.PC")    byYear[y].co2raw = r.value;
   });
   return byYear;
 }
 
-// load data from API and process into DATA
 async function loadDATAFromAPI(){
-  var rawByCountry = {};
-  for (var i=0;i<COUNTRIES.length;i++){
-    var name = COUNTRIES[i];
-    var iso3 = ISO3_BY_NAME[name];
-    var rows = await _fetchCountrySeries(iso3);
+  const rawByCountry = {};
+  for (let i=0; i<COUNTRIES.length; i++){
+    const name = COUNTRIES[i];
+    const iso3 = ISO3_BY_NAME[name];
+    const rows = await _fetchCountrySeries(iso3);
     rawByCountry[name] = _pivotSeries(rows);
   }
 
-  // compute min/max for each metric
-  var allPM25=[], allForest=[], allCO2=[];
+  const allPM25=[], allForest=[], allCO2=[];
   Object.values(rawByCountry).forEach(byYear=>{
     Object.values(byYear).forEach(rec=>{
       if(rec.pm25   != null) allPM25.push(rec.pm25);
@@ -116,40 +98,35 @@ async function loadDATAFromAPI(){
       if(rec.co2raw != null) allCO2.push(rec.co2raw);
     });
   });
-  var Rpm   = _minmax(allPM25);
-  var Rfor  = _minmax(allForest);
-  var Rco2  = _minmax(allCO2);
+  const Rpm  = _minmax(allPM25);
+  const Rfor = _minmax(allForest);
+  const Rco2 = _minmax(allCO2);
 
-  // normalize into 0~1 and invert where needed
+ 
   DATA = {};
   Object.entries(rawByCountry).forEach(([name, byYear])=>{
     DATA[name] = {};
     Object.entries(byYear).forEach(([yStr, rec])=>{
-      var y = Number(yStr);
-      // air: PM2.5 lower is better -> 1 - normalized value
-      var air01    = rec.pm25   == null ? null : (1 - _norm01(rec.pm25,   Rpm.min,  Rpm.max));
-      // forest: higher is better -> normalized value
-      var forest01 = rec.forest == null ? null :      _norm01(rec.forest, Rfor.min, Rfor.max);
-      // co2: lower is better -> 1 - normalized value
-      var co201    = rec.co2raw == null ? null : (1 - _norm01(rec.co2raw, Rco2.min, Rco2.max));
+      const y = Number(yStr);
+      const air01    = rec.pm25   == null ? null : (1 - _norm01(rec.pm25,   Rpm.min,  Rpm.max)); 
+      const forest01 = rec.forest == null ? null :      _norm01(rec.forest, Rfor.min, Rfor.max); 
+      const co201    = rec.co2raw == null ? null : (1 - _norm01(rec.co2raw, Rco2.min, Rco2.max)); 
 
       DATA[name][y] = { air: air01, forest: forest01, co2: co201, gdp: rec.gdp };
     });
   });
 
-  // compute GDP range for money stacks
-  if (typeof computeGdpRange === 'function') computeGdpRange();
-  if (typeof updateLegend === 'function')    updateLegend();
-  if (typeof redrawAll === 'function')       redrawAll();
+  if (typeof computeGdpRange === "function") computeGdpRange();
+  if (typeof updateLegend === "function")    updateLegend();
+  if (typeof redrawAll === "function")       redrawAll();
 }
 
-// immediate load
 (async function(){
   try {
     await loadDATAFromAPI();
   } catch (e) {
     console.error(e);
-    alert('data loading failed' + (e.message || e));
+    alert("data loading failed: " + (e.message || e));
   }
 })();
 
