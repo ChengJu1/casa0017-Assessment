@@ -66,7 +66,7 @@ function init() {
 
 async function fetchCountryGDP(iso3) {
   try {
-    const response = await fetch(`api/country/${iso3}/gdp`);
+    const response = await fetch(`/api/country/${iso3}/gdp`);
     if (!response.ok) throw new Error('Network response was not ok');
     const data = await response.json();
 
