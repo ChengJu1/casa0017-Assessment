@@ -24,10 +24,13 @@ import { open } from "sqlite";
 import path from "path";
 import { fileURLToPath } from "url";
 
+// __dirname setup //
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// SQLite connection //
 const dbPath = path.resolve(__dirname, "eco_env.sqlite");
+
 console.log("🔗 SQLite path:", dbPath);
 
 export const db = await open({
