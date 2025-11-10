@@ -565,9 +565,9 @@ LINE2_MATERIALS.push(selectedGlowMat2);
   /* ---------- Navigation + interactions ---------- */
   function goToCountryDetails(countryCode) {
     const routes = {
-      BRA: "../brazil.html",
-      POL: "../poland.html",
-      KOR: "../southKorea.html",
+      BRA: "country.html?country=Brazil",
+      POL: "country.html?country=Poland",
+      KOR: "country.html?country=South%20Korea",
     };
     window.location.href = routes[countryCode] || "/";
   }
