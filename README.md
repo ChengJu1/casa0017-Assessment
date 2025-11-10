@@ -39,11 +39,11 @@
 
 
 ## 👥 Contact Details
-Lizzim24 https://github.com/Lizzim24
-ChengJu1 https://github.com/ChengJu1
-JRONGW https://github.com/JRONGW
-Ananyaucl https://github.com/Ananyaucl
-yussr19 https://github.com/yussr19
+- **Lizzim24 https://github.com/Lizzim24
+- **ChengJu1 https://github.com/ChengJu1
+- **JRONGW https://github.com/JRONGW
+- **Ananyaucl https://github.com/Ananyaucl
+- **yussr19 https://github.com/yussr19
 
 ##  Installation
 1) Prerequisites
