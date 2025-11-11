@@ -1,0 +1,8 @@
+services:
+  casa0017assessment:
+    image: casa0017assessment
+    build:
+      context: Website
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production

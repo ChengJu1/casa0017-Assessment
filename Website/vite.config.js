@@ -7,17 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   root: 'client',
   publicDir: 'public',
-    build: {
-    outDir: resolve(__dirname, 'dist'),
-    rollupOptions: {
-      input: {
-        home:    resolve(__dirname, 'client/index.html'),
-        timeline:resolve(__dirname, 'client/timeline.html'),
-        about:   resolve(__dirname, 'client/about.html'),
-        country: resolve(__dirname, 'client/country.html'),
-      }
-    }
-  },
+ 
   server: {
     port: 5173,
     proxy: {
