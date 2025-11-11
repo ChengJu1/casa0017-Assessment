@@ -64,7 +64,7 @@ async function _fetchCountrySeries(iso3){
     'EN.ATM.CO2E.PC'      // CO2 -> co2 (lower is better)
   ].join(',');
 
-  var url = `${API_BASE}/api/country/${iso3}/series?codes=${encodeURIComponent(codes)}`;
+  var url = `${API_BASE}:3000/api/country/${iso3}/series?codes=${encodeURIComponent(codes)}`;
   var res = await fetch(url);
   if(!res.ok) throw new Error('API error: '+url);
   return await res.json();
