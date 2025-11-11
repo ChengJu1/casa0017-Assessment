@@ -53,7 +53,7 @@ function _norm01(v,min,max){
   return Math.max(0,Math.min(1,x));
 }
 
-const API_BASE = "http://10.129.111.24";
+const API_BASE = "";
 
 // backend API fetch for a country's series data
 async function _fetchCountrySeries(iso3){

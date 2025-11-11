@@ -19,7 +19,7 @@ var allLabels = [];
 var allValues = [];
 var policyData = [];
 
-const API_BASE = "http://10.129.111.24";
+const API_BASE = "";
 
 // Register plugins ONCE at module level
 if (window['chartjs-plugin-annotation']) {

@@ -37,6 +37,15 @@ export const db = await open({
   filename: dbPath,
   driver: sqlite3.Database,
 });
+export default {
+  server: {
+    host: true,
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
+  }
+}
+
 console.log("✅ database connect successfully！");
 
 await db.exec("PRAGMA journal_mode = DELETE;");
