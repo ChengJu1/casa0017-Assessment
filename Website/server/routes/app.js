@@ -25,8 +25,6 @@ const CLIENT_DIR = path.resolve(__dirname, "../../client");
 
 
 
-
-
 app.get("/api/health", (req, res) => res.json({ ok: true }));
 
 app.get("/api/countries", async (req, res, next) => {
@@ -180,7 +178,6 @@ app.get("/api/country/:iso3/policies", async (req, res, next) => {
 
 
 app.use(express.static(CLIENT_DIR)); 
-
 
 app.get("/", (req, res) => {
   res.sendFile(path.resolve(CLIENT_DIR, "index.html"));
