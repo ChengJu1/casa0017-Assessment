@@ -1,13 +1,40 @@
+# version: "3.8"
+
+# services:
+#   backend:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     container_name: casa0017_backend
+#     working_dir: /server
+#     command: ["node", "server.js"]
+#     ports:
+#       - "8000:8000"
+#     volumes:
+#       - /home/pi/casa0017-Assessment/Website/server/db/eco_env.sqlite:/app/server/db/eco_env.sqlite
+#     restart: always
+
+#   frontend:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     container_name: casa0017_frontend
+#     working_dir: /client
+#     command: ["npm", "start"]
+#     ports:
+#       - "3000:3000"
+#     restart: always
+
+
+
 version: "3.8"
 
 services:
   web:
     build: .
-    container_name: casa0017
+    container_name: casa0017_backend
     restart: always
     ports:
       - "8000:8000"
     volumes:
-      # Mount the DB file from host → container
       - ./server/db/eco_env.sqlite:/website/server/db/eco_env.sqlite
-  
