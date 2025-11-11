@@ -4,7 +4,6 @@ import cors from "cors";
 import { db } from "../db/config.js";
 import path from "path";
 import { fileURLToPath } from "url";
-import helmet from "helmet";
 
 const app = express();
 app.use(cors());
@@ -14,11 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
 
 const CLIENT_DIR = path.resolve(__dirname, "../../dist");
-console.log("📂 Serving frontend from:", CLIENT_DIR);
-
-// ✅ expose only the three package (safer than all of node_modules)
-const THREE_DIR = path.resolve(__dirname, "../../node_modules/three");
-app.use("/vendor/three", express.static(THREE_DIR, { immutable: true, maxAge: "1y" }));
+console.log("Serving frontend from:", CLIENT_DIR);
 
 app.get("/api/health", (req, res) => res.json({ ok: true }));
 
@@ -153,7 +148,6 @@ app.get(/.*\.html$/, (req, res) => {
   res.sendFile(path.join(CLIENT_DIR, req.path.replace(/^\//, "")));
 });
 
-
 app.get("/", (req, res) => {
   res.sendFile(path.resolve(CLIENT_DIR, "index.html"));
 });
@@ -162,12 +156,6 @@ app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ error: "internal_error", detail: err.message });
 });
-
-// ✅ serve vendor libs from node_modules
-app.use(
-  "/vendor",
-  express.static(path.join(__dirname, "..", "..", "node_modules"))
-);
 
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, "0.0.0.0", () => {
