@@ -1,26 +1,26 @@
 // ========================================
-// STEP 1: 添加这两个 imports
+// STEP 1: Imports
 // ========================================
 import express from "express";
 import cors from "cors";
 import { db } from "../db/config.js";
-import path from "path";                    // ← 新增：添加这行
-import { fileURLToPath } from "url";        // ← 新增：添加这行
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 // ========================================
-// STEP 2: 在这里添加文件路径设置
+// STEP 2: 文件路径设置
 // ========================================
-const __filename = fileURLToPath(import.meta.url);  // ← 新增：添加这行
-const __dirname = path.dirname(__filename);         // ← 新增：添加这行
-const CLIENT_DIR = path.resolve(__dirname, "../../client/dist");  // ← 新增：添加这行
-console.log(`📂 Serving frontend from: ${CLIENT_DIR}`);           // ← 新增：添加这行（可选）
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const CLIENT_DIR = path.resolve(__dirname, "../../client/dist");
+console.log(`📂 Serving frontend from: ${CLIENT_DIR}`);
 
 // ========================================
-// API 路由（保持不变）
+// API 路由
 // ========================================
 
 // health check
@@ -183,32 +183,30 @@ app.get("/api/country/:iso3/gdp", async (req, res, next) => {
 });
 
 // ========================================
-// STEP 3: 在所有 API 路由之后，添加静态文件服务
+// 静态文件服务（必须在 API 路由之后）
 // ========================================
-app.use(express.static(CLIENT_DIR));  // ← 新增：添加这行
+app.use(express.static(CLIENT_DIR));
 
-app.get("/", (req, res) => {          // ← 新增：添加这整个函数
-  res.sendFile(path.resolve(CLIENT_DIR, "index.html"));
+// 处理所有非 API 路由（支持 SPA 和多个 HTML 文件）
+app.get("*", (req, res) => {
+  res.sendFile(path.join(CLIENT_DIR, "index.html"));
 });
 
-// ⚠️ 如果有这个旧的响应，删除它：
-// app.get("/", (req, res) => {
-//   res.send("<h2>🌍 Eco Env API (SQLite) has run...</h2>");
-// });
-
 // ========================================
-// 错误处理（保持不变）
+// 错误处理
 // ========================================
 app.use((err, req, res, next) => {
-  console.error(err);
+  console.error('❌ Error:', err);
   res.status(500).json({ error: "internal_error", detail: err.message });
 });
 
 // ========================================
-// 启动服务器（保持不变）
+// 启动服务器
 // ========================================
-app.listen(3000, "0.0.0.0", () =>
-  console.log("✅ SQLite API running at http://localhost:3000")
-);
+const PORT = 3000;
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`✅ SQLite API running at http://localhost:${PORT}`);
+  console.log(`📡 Network: http://10.129.111.24:${PORT}`);
+});
 
-process.stdin.resume();  // 保持进程运行
+process.stdin.resume();
