@@ -72,9 +72,13 @@
 4) Run the dev server
 -     npm run dev
 -     Then open the printed local URL (typically http://localhost:5173/).
-5) Build for production (/casa0017-Assessment/Website/..)
--     npm run build
+5) Build for production 
+-     cd casa0017-Assessment/Website/server
+-     node routes/app.js
+-     (if have bug, plz delete eco_env.sqlite file, then) node db/init.js
+-     cd ..
 -     npm start
 6) Preview the production build (optional)
 -     npm run preview
+
 
