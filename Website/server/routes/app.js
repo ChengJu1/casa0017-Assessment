@@ -152,6 +152,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "internal_error", detail: err.message });
 });
 
+<<<<<<< Updated upstream
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`✅ SQLite API running at http://localhost:${PORT}`);
@@ -159,3 +160,19 @@ app.listen(PORT, "0.0.0.0", () => {
   console.log(`💡 Test API health: http://localhost:${PORT}/api/health`);
   console.log(`📂 Serving frontend from: ${CLIENT_DIR}`);
 });
+=======
+app.get('/api/health', (req, res) => {
+  // if you have a sqlite handle called `db`, you can quick-test it:
+  db.get('SELECT 1 as ok', (err, row) => {
+    if (err) return res.status(500).json({ ok: false, error: err.message });
+    res.json({ ok: true, db: row?.ok === 1 });
+  });
+});
+
+
+// start server
+app.listen(3000, () =>
+  console.log("✅ SQLite API running at http://localhost:3000")
+);
+
+>>>>>>> Stashed changes

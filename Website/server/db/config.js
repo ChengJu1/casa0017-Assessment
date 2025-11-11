@@ -25,16 +25,21 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-// __dirname setup //
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname  = path.dirname(__filename);
 
-// SQLite connection //
-const dbPath = path.resolve(__dirname, "eco_env.sqlite");
+// __dirname = Website/server/db
+const ROOT    = path.resolve(__dirname, "..", "..");     // -> Website/
+const DB_PATH = path.join(ROOT,"server", "db", "eco_env.sqlite"); // <- SAME as seeder
 
+<<<<<<< Updated upstream
 sqlite3.verbose(); // helpful debugging logs
 
 console.log("🔗 SQLite path:", dbPath);
+=======
+
+console.log("🔗 Using DB:", DB_PATH);
+>>>>>>> Stashed changes
 
 // Guard: warn if file missing or suspiciously small
 try {
@@ -48,9 +53,10 @@ try {
 
 
 export const db = await open({
-  filename: dbPath,
+  filename: DB_PATH,
   driver: sqlite3.Database,
 });
+
 console.log("✅ database connect successfully！");
 
 await db.exec("PRAGMA journal_mode = WAL;");
