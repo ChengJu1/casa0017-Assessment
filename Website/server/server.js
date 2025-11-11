@@ -1,26 +1,28 @@
 #!/usr/bin/env node
 
-//  SERVER TITLE
-//  Author:  AUTHORS NAMES
-//  Description:  WHAT DOES THIS PACKAGE DO
-//  Version: 0.0.1
-//
-//  Notes:   Any notes we need to know about the server     
-
-//  Install Instructions
-//      npm install moment mysql express ejs ....  
-//         OR Groups will get more credit if they use
-//      npm install and npm start shortcuts and include a package.json file
-//          - See https://docs.npmjs.com/creating-a-package-json-file
-
 // Website/back-end/server.js
-const path = require('path');
-const express = require('express');
+// Author: your name
+// Description: simple express static server
+
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// 兼容 ESM 没有 __dirname 的问题
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 
+// 静态文件托管：client 文件夹
 app.use(express.static(path.join(__dirname, '../client')));
+
+// 根路由
 app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, '../client/index.html'))
 );
 
-app.listen(3000, "0.0.0.0");
+// 监听所有网卡
+app.listen(3000, '0.0.0.0', () => {
+  console.log('✅ API running on http://<你的电脑IP>:3000');
+});
