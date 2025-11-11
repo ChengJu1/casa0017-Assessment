@@ -28,6 +28,10 @@ const __dirname = path.dirname(__filename);
 const CLIENT_DIR = path.resolve(__dirname, "../../client"); 
 
 
+// ✅ expose only the three package (safer than all of node_modules)
+const THREE_DIR = path.resolve(__dirname, "../../node_modules/three");
+app.use("/vendor/three", express.static(THREE_DIR, { immutable: true, maxAge: "1y" }));
+
 app.get("/api/health", (req, res) => res.json({ ok: true }));
 
 app.get("/api/countries", async (req, res, next) => {
