@@ -27,3 +27,12 @@
     "vite": "^5.4.21"
   }
 }
+{
+  "name": "website",
+  "type": "module",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "vite",           // 若你在 client 目录运行 dev，可放在 client/package.json
+    "build": "vite build"    // 同上
+  }
+}

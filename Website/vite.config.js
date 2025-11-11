@@ -1,5 +1,9 @@
-import { defineConfig } from 'vite';
-export default defineConfig({
-  root: 'client',
-  publicDir: 'public'
-});
+// Website/client/vite.config.js
+export default {
+  server: {
+    host: true,
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
+  }
+};
