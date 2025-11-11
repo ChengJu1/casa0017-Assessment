@@ -35,6 +35,6 @@ services:
     container_name: casa0017_backend
     restart: always
     ports:
-      - "8000:8000"
+      - "3000:3000"
     volumes:
       - ./server/db/eco_env.sqlite:/website/server/db/eco_env.sqlite
