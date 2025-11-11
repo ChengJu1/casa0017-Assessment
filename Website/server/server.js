@@ -1,29 +1,24 @@
 #!/usr/bin/env node
 
-// Website/back-end/server.js
-// Author: your name
-// Description: simple express static server
+// Website/server/server.js
+// Express 静态托管 Vite 构建产物（dist）+ 监听 0.0.0.0
 
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-
-// 兼容 ESM 没有 __dirname 的问题
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname  = path.dirname(__filename);
 
 const app = express();
 
-// 静态文件托管：client 文件夹
-app.use(express.static(path.join(__dirname, '../client')));
-
-// 根路由
+// 生产环境：托管 client/dist
+app.use(express.static(path.join(__dirname, '../client/dist')));
 app.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, '../client/index.html'))
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'))
 );
 
-// 监听所有网卡
+// 启动
 app.listen(3000, '0.0.0.0', () => {
-  console.log('✅ API running on http://<你的电脑IP>:3000');
+  console.log('✅ Server running at http://<你的树莓派IP>:3000');
 });
