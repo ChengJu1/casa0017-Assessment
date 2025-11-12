@@ -1,34 +1,5 @@
-// Timeline feature code goes here/* ===================== 1) Data (by country name) ===================== */
-/* DATA[country][year][metric] is a number from 0 to 1 */
-// 改这个part就好中间的数据处理逻辑我都写好了 你写好导入到这几个数列里就行
-/* var DATA = {
-  "Brazil": {
-    2000: { air: 0.35, forest: 0.82, water: 0.40, gdp: 655 }, 
-    2005: { air: 0.42, forest: 0.79, water: 0.46, gdp: 884 },
-    2010: { air: 0.55, forest: 0.75, water: 0.53, gdp: 2200 },
-    2015: { air: 0.60, forest: 0.71, water: 0.58, gdp: 1800 },
-    2020: { air: 0.65, forest: 0.69, water: 0.62, gdp: 1445 }
-  },
-
-  "Poland": {
-    2000: { air: 0.30, forest: 0.47, water: 0.35, gdp: 172 },
-    2005: { air: 0.45, forest: 0.50, water: 0.40, gdp: 306 }, 
-    2010: { air: 0.58, forest: 0.53, water: 0.48, gdp: 480 },
-    2015: { air: 0.66, forest: 0.56, water: 0.55, gdp: 545 },
-    2020: { air: 0.72, forest: 0.59, water: 0.60, gdp: 595 }
-  },
-
-  "South Korea": {
-    2000: { air: 0.28, forest: 0.63, water: 0.38, gdp: 576 },
-    2005: { air: 0.36, forest: 0.65, water: 0.44, gdp: 934 },
-    2010: { air: 0.50, forest: 0.66, water: 0.52, gdp: 1200 },
-    2015: { air: 0.61, forest: 0.67, water: 0.59, gdp: 1410 },
-    2020: { air: 0.68, forest: 0.68, water: 0.66, gdp: 1630 }
-  }
-};*/
-
 var COUNTRIES = ["Brazil", "Poland", "South Korea"];
-var WORLD_GEOJSON_URL = "./src/map.geojson";
+var WORLD_GEOJSON_URL = "./public/src/map.geojson";
 var GDP_MIN = Infinity;
 var GDP_MAX = -Infinity;
 
