@@ -4,7 +4,7 @@ services:
   # Backend API
   backend:
     build: 
-      context: ./app
+      context: .
       dockerfile: server/Dockerfile
     container_name: backend-api
     ports:

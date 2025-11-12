@@ -22,7 +22,7 @@ FROM node:22-slim
 WORKDIR /app
 
 # Copy package files from root
-COPY package*.json ./
+COPY package*.json .../
 
 # Install dependencies
 RUN npm ci --production
