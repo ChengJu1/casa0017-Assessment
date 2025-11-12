@@ -3,7 +3,7 @@
 // ========================================
 import express from "express";
 import cors from "cors";
-import { db } from "../db/config.js";
+import { db } from "./db/config.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -63,7 +63,7 @@ app.get("/api/country/:iso3/policies", async (req, res, next) => {
       JOIN country  c ON c.id = d.country_id
       WHERE 
         c.iso3 = ? 
-        AND i.igroup = 'POL'
+        AND i.igroup = 'policy'
         AND d.value > 0
       GROUP BY i.code, i.name
       ORDER BY i.code
