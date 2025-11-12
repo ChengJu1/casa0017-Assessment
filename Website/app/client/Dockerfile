@@ -24,7 +24,7 @@ COPY package*.json ./
 RUN npm ci
 
 # Copy all client source code
-COPY . .
+COPY ./app/client/ /app/client/
 
 # Build for production (Vite bundles Three.js and all modules)
 RUN npm run build
