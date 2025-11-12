@@ -1,5 +1,5 @@
 var COUNTRIES = ["Brazil", "Poland", "South Korea"];
-var WORLD_GEOJSON_URL = "/data/map.geojson";
+var WORLD_GEOJSON_URL = "../data/map.geojson";
 var GDP_MIN = Infinity;
 var GDP_MAX = -Infinity;
 
