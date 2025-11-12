@@ -1,5 +1,5 @@
 var COUNTRIES = ["Brazil", "Poland", "South Korea"];
-var WORLD_GEOJSON_URL = "../data/map.geojson";
+var WORLD_GEOJSON_URL = "../public/data/map.geojson";
 var GDP_MIN = Infinity;
 var GDP_MAX = -Infinity;
 
@@ -225,6 +225,7 @@ var WORLD_GEOJSON = null;
 function loadWorld() {
   if (WORLD_GEOJSON) return Promise.resolve(WORLD_GEOJSON);
   return fetch(WORLD_GEOJSON_URL).then(function (res) {
+    console.log("Loading world geojson from", WORLD_GEOJSON_URL);
     if (!res.ok) throw new Error("Failed to load " + WORLD_GEOJSON_URL);
     return res.json();
   }).then(function (json) {

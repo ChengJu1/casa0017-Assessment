@@ -43,8 +43,6 @@ if (window['chartjs-plugin-annotation']) {
     }
   );
   
-} else {
-  console.error('Annotation plugin not found');
 }
 
 function init() {
@@ -52,7 +50,6 @@ function init() {
     ctx = canvas.getContext('2d');
     w = canvas.width;
     h = canvas.height
-    console.log("w", w, "h", h)
 
     canvas.addEventListener("mousemove", function (e) {
         findxy('move', e)
@@ -92,13 +89,12 @@ async function fetchCountryGDP(iso3) {
     allLabels = allYears;
     allValues = allYears.map(year => gdpByYear[year] !== undefined ? gdpByYear[year] : null);
 
-    console.log(`Fetched ${data.length} GDP entries for ${iso3}`);
-    console.log(`Added ${policyYears.length} policy years to labels`);
-    console.log('Total labels:', allLabels.length);
+    // console.log(`Fetched ${data.length} GDP entries for ${iso3}`);
+    // console.log(`Added ${policyYears.length} policy years to labels`);
+    // console.log('Total labels:', allLabels.length);
     
     graphUpdate(allLabels, allValues, policyData);
   } catch (err) {
-    console.error('Error fetching GDP data:', err);
     alert('Failed to load GDP data from API.');
   }
 }
