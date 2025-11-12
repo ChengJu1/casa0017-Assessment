@@ -29,8 +29,8 @@ services:
   # Frontend
   frontend:
     build: 
-      context: ./app/client
-      dockerfile: Dockerfile
+      context: ./app
+      dockerfile: /client/Dockerfile
     container_name: frontend-app
     ports:
       - "5173:80"
