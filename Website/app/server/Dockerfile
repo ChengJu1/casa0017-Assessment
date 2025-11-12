@@ -28,7 +28,7 @@ COPY package*.json ./
 RUN npm ci --omit=dev
 
 # Copy entire server directory
-COPY server/ ./app/server/
+COPY ./app/server/  /server/
 
 # Expose backend port
 EXPOSE 3000
