@@ -24,7 +24,12 @@ COPY package*.json ./
 RUN npm ci
 
 # Copy all client source code
-COPY ./app/client/ /app/client/
+# Copy Vite config (repo root) so build uses the same configuration
+COPY vite.config.js /app/vite.config.js
+
+# Copy client source code into the image at /app/app/client
+# (vite.config resolves path relative to its file: path.resolve(__dirname, 'app/client'))
+COPY ./app/client/ /app/app/client/
 
 # Build for production (Vite bundles Three.js and all modules)
 RUN npm run build
@@ -38,8 +43,9 @@ FROM nginx:alpine
 # Copy the built files from the build stage
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Copy your custom Nginx config
-COPY nginx-frontend.conf /etc/nginx/conf.d/default.conf
+# Copy your custom Nginx config from the repo path
+# (we use repo root as build context so the file lives at ./app/client/nginx-frontend.conf)
+COPY app/client/nginx-frontend.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
