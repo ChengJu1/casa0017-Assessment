@@ -4,7 +4,7 @@ services:
   # Backend API
   backend:
     build: 
-      context: .
+      context: ./app
       dockerfile: server/Dockerfile
     container_name: backend-api
     ports:
@@ -28,7 +28,7 @@ services:
   # Frontend
   frontend:
     build: 
-      context: ./client
+      context: ./app/client
       dockerfile: Dockerfile
     container_name: frontend-app
     ports:
