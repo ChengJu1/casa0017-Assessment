@@ -25,7 +25,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci --production
+RUN npm ci --omit=dev
 
 # Copy entire server directory
 COPY server/ ./app/server/
