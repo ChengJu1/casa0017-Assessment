@@ -48,7 +48,7 @@ services:
       - "443:443"
     volumes:
       - app/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - app/nginx/ssl:/etc/nginx/ssl:ro
+      
     depends_on:
       - backend
       - frontend
