@@ -16,7 +16,8 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
-    restart: unless-stopped
+    # restart: unless-stopped
+    restart: no
     networks:
       - app-network
     healthcheck:
@@ -35,7 +36,8 @@ services:
       - "5173:80"
     depends_on:
       - backend
-    restart: unless-stopped
+    # restart: unless-stopped
+    restart: no
     networks:
       - app-network
 
@@ -52,7 +54,8 @@ services:
     depends_on:
       - backend
       - frontend
-    restart: unless-stopped
+    # restart: unless-stopped
+    restart: no
     networks:
       - app-network
 
