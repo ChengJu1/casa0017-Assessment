@@ -1,6 +1,6 @@
 FROM node:22-slim
 
-WORKDIR /Website
+WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
