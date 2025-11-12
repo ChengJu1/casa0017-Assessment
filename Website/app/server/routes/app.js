@@ -89,7 +89,7 @@ import { db } from "../db/config.js";
 
 const app = express();
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://10.129.111.5'],
+  origin: ["*"],
   credentials: true
 }));
 app.use(express.json());
