@@ -282,8 +282,10 @@ app.use((err, req, res, next) => {
     .json({ error: "internal_error", detail: err.message });
 });
 
-// const PORT = process.env.PORT || 3000;
-app.listen(3000, () =>
-  console.log("SQLite API running at http://localhost:3000")
-);
+const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || '0.0.0.0';
+app.listen(PORT, HOST, () => {
+  console.log(`SQLite API running at http://localhost:${PORT}`);
+  console.log(`Network access: http://<your-ip>:${PORT}`);
+});
 
