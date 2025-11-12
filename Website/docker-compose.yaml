@@ -11,7 +11,7 @@ services:
       - "3000:3000"
     volumes:
       # Mount SQLite database to persist data
-      - ./server/db/eco_env.sqlite:/app/server/db/eco_env.sqlite
+      - ./app/server/db/eco_env.sqlite:/app/server/db/eco_env.sqlite
 
     environment:
       - NODE_ENV=production
