@@ -64,7 +64,7 @@ if (window['chartjs-plugin-annotation']) {
   
 }
 
-function init() {
+async function init() {
     canvas = document.getElementById('canvasChart')
     ctx = canvas.getContext('2d');
     w = canvas.width;
@@ -456,4 +456,4 @@ function findxy(res, e) {
 // Expose init to global scope so pages that call `init()` (e.g. country.html)
 // can access it after bundling/production builds where module scoping may hide
 // top-level functions.
-if (typeof window !== 'undefined') window.init = init;
+// if (typeof window !== 'undefined') window.init = init;

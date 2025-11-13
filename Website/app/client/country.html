@@ -93,7 +93,7 @@
 
       window.onload = async function() {
         await loadCountryHTML(countryName);   // ← Load written content
-        init();                              // ← Set up chart canvas etc.
+        await init();                              // ← Set up chart canvas etc.
         await fetchCountryGDP(countryCode);  // ← Fetch and draw data
       };
     </script>
