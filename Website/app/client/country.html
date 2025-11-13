@@ -56,9 +56,11 @@
 
     </div>
 
-    <script type="module" src="js/utils/lineGraph.js"></script>
+    <script type="module" src="js/utils/lineGraph.js"> </script>
+    <script type="module">
+    import { init, fetchCountryGDP } from './js/countryChart.js'
 
-    <script>
+  
       const params = new URLSearchParams(window.location.search);
       const countryName = params.get("country");
 
