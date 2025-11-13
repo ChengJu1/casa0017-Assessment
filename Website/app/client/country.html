@@ -56,9 +56,8 @@
 
     </div>
 
-    <script type="module" src="js/utils/lineGraph.js"> </script>
-    <script type="module">
-    import { init, fetchCountryGDP } from 'js/utils/lineGraph.js';
+  <script type="module">
+  import { init, fetchCountryGDP } from './js/utils/LineGraph.js';
 
   
       const params = new URLSearchParams(window.location.search);
@@ -94,9 +93,9 @@
       const countryCode = ISO3_BY_NAME[countryName];
 
       window.onload = async function() {
-        await loadCountryHTML(countryName);   // ← Load written content
-        await init();                              // ← Set up chart canvas etc.
-        await fetchCountryGDP(countryCode);  // ← Fetch and draw data
+        await loadCountryHTML(countryName);   // Load written content
+        await init();                              // Set up chart canvas 
+        await fetchCountryGDP(countryCode);  // Fetch and draw data
       };
     </script>
   </body>
