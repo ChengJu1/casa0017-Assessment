@@ -24,9 +24,24 @@ function _norm01(v,min,max){
   return Math.max(0,Math.min(1,x));
 }
 
-const API_BASE_URL = window.location.hostname === 'localhost' && window.location.port === '5173'
-  ? 'http://localhost:3000'  // Development
-  : '';
+// Determine API base URL dynamically
+// In development (Vite), backend runs on localhost:3000
+// In production, assumes backend is at same host on port 3000
+function getAPIBaseURL() {
+  // If running on Vite dev server (port 5173 or similar)
+  if (window.location.hostname === 'localhost' && window.location.port === '5173') {
+    return 'http://localhost:3000';
+  }
+  // If backend and frontend are on the same host (Docker, reverse proxy, etc.)
+  // Construct the backend URL on the same host, port 3000
+  if (window.location.hostname === 'localhost') {
+    return `http://${window.location.hostname}:3000`;
+  }
+  // For production/network deployments, try same host on port 3000
+  return `http://${window.location.hostname}:3000`;
+}
+
+const API_BASE_URL = getAPIBaseURL();
 
 // backend API fetch for a country's series data
 async function _fetchCountrySeries(iso3){
@@ -423,7 +438,7 @@ function updateCash(countryName, val01) {
     const col = i % CASH_PER_ROW;                  // 0..CASH_PER_ROW-1
 
     const img = document.createElement("img");
-    img.src = "./img/money.png";
+    img.src = "/money.png";
     img.className = "cash-note";
     // position: left-to-right, build upward
     img.style.left = (col * NOTE_SPACING_X) + "px";
