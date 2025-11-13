@@ -1,10 +1,10 @@
 let chart
-var canvas, ctx, flag = false,
-    prevX = 0,
-    prevY = 0;
-currX = 0,
-    currY = 0;
-dot_flag = false;
+var canvas, ctx, flag = false
+var prevX = 0
+var prevY = 0;
+var currX = 0
+var currY = 0;
+var dot_flag = false;
 var show_flag = false;
 
 const dpr = window.devicePixelRatio || 1;
