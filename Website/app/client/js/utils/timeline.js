@@ -27,7 +27,7 @@ function _norm01(v,min,max){
 // Determine API base URL dynamically
 const API_BASE_URL = window.location.hostname === 'localhost' && window.location.port === '5173'
   ? 'http://localhost:3000'  // Development
-  : 'http://10.129.111.5:3000';
+  : '';
 
 // backend API fetch for a country's series data
 async function _fetchCountrySeries(iso3){

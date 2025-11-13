@@ -74,7 +74,7 @@
       // Dynamically load the correct HTML snippet
       async function loadCountryHTML(countryName) {
         const fileName = countryName.toLowerCase().replace(/\s+/g, "") + ".html";
-        const url = `public/content/${fileName}`;
+        const url = `content/${fileName}`;
 
         try {
           const res = await fetch(url);
