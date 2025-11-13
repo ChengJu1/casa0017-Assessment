@@ -452,3 +452,8 @@ function findxy(res, e) {
         }
     }
 }
+
+// Expose init to global scope so pages that call `init()` (e.g. country.html)
+// can access it after bundling/production builds where module scoping may hide
+// top-level functions.
+if (typeof window !== 'undefined') window.init = init;
