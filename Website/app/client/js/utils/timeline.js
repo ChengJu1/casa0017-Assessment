@@ -424,7 +424,7 @@ function updateCash(countryName, val01) {
     const col = i % CASH_PER_ROW;                  // 0..CASH_PER_ROW-1
 
     const img = document.createElement("img");
-    img.src = "/money.png";
+    img.src = "/assets/money.png";
     img.className = "cash-note";
     // position: left-to-right, build upward
     img.style.left = (col * NOTE_SPACING_X) + "px";
