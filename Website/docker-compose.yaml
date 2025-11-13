@@ -33,8 +33,8 @@ services:
       dockerfile: app/client/Dockerfile
 
     container_name: frontend-app
-    # ports:
-    #   - "5173:80"
+    ports:
+      - "5173:80"
     depends_on:
       - backend
     # restart: unless-stopped
