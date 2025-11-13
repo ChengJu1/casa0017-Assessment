@@ -40,7 +40,7 @@ var policyData = [];
 
 const API_BASE_URL = window.location.hostname === 'localhost' && window.location.port === '5173'
   ? 'http://localhost:3000'  // Development
-  : 'http://10.129.111.5:3000';
+  : '';
 
 
 // Register plugins ONCE at module level
